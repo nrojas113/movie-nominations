@@ -57,7 +57,11 @@ function App() {
     <Container>
       <Header />
       <SearchForm handleInputChange={handleInputChange} keyword={keyword} />
-      <Results addNomination={addNomination} results={results} />
+      <Results
+        addNomination={addNomination}
+        results={results}
+        keyword={keyword}
+      />
       <NominationList
         nominations={nominations}
         deleteNomination={deleteNomination}

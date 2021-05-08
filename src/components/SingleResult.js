@@ -1,25 +1,35 @@
 import React from "react";
-import { Col } from "react-bootstrap";
+import { Col, Button } from "react-bootstrap";
 
-function SingleResult({ idx, result, addNomination, deleteNomination }) {
+function SingleResult({ result, addNomination, deleteNomination }) {
   return (
-    <Col>
-      <h2>
-        {result.Title} ({result.Year}){" "}
+    <Col className="text-center mt-5">
+      <h2 style={{ fontSize: "1.5em" }}>
+        {result.Title} ({result.Year})
       </h2>
-      <img src={result.Poster} alt="movie poster" />
+      <img
+        src={result.Poster}
+        alt="movie poster"
+        className="mb-3"
+        height="400px"
+      />
       {addNomination && (
-        <button type="button" onClick={(evt) => addNomination(evt, result)}>
-          Save
-        </button>
+        <Button
+          type="button"
+          variant="primary"
+          onClick={(evt) => addNomination(evt, result)}
+        >
+          Nominate
+        </Button>
       )}
       {deleteNomination && (
-        <button
+        <Button
           type="button"
+          variant="warning"
           onClick={(evt) => deleteNomination(evt, result.Title)}
         >
-          Delete
-        </button>
+          Remove
+        </Button>
       )}
     </Col>
   );

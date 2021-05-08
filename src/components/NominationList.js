@@ -5,8 +5,10 @@ import SingleResult from "./SingleResult";
 function NominationList({ nominations, deleteNomination }) {
   console.log("Nomination", nominations);
   return (
-    <Container>
-      <h1>Nominations List</h1>
+    <Container
+      style={{ backgroundColor: "mistyrose", padding: "3em", marginTop: "2em" }}
+    >
+      <h1>My Nominations</h1>
       <Row>
         {nominations &&
           nominations.map((nomination, idx) => (

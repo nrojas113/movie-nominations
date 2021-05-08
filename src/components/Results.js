@@ -2,10 +2,12 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import SingleResult from "./SingleResult";
 
-function Results({ results, addNomination }) {
+function Results({ results, addNomination, keyword }) {
   return (
-    <Container>
-      <h1>Your Results</h1>
+    <Container
+      style={{ backgroundColor: "lightgray", padding: "3em", marginTop: "2em" }}
+    >
+      <h1>Results for "{keyword}"</h1>
       <Row>
         {results &&
           results.map((result, idx) => (

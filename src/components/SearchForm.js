@@ -1,17 +1,18 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 function Search({ handleInputChange, keyword }) {
   return (
-    <form>
-      <label>Movie Title</label>
-      <input
+    <Form>
+      <Form.Label>Search Movies</Form.Label>
+      <Form.Control
         type="text"
         name="keyword"
         value={keyword}
-        placeholder="Search Movies"
+        placeholder="Movie Title"
         onChange={handleInputChange}
       />
-    </form>
+    </Form>
   );
 }
 
