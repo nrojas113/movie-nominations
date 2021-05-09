@@ -6,7 +6,6 @@ import SearchForm from "./components/SearchForm";
 import NominationList from "./components/NominationList";
 import Results from "./components/Results";
 import AlertMessage from "./components/AlertMessage";
-// import { apikey } from "./secrets";
 import useLocalStorage from "./hooks/useLocalStorage";
 const apikey = process.env.REACT_APP_API_KEY;
 
@@ -62,7 +61,6 @@ function App() {
     setPage(selectedPage);
   };
 
-  useEffect(() => {}, []);
   //This useEffect triggers if the keyword & page (state) changes.
   //Fetch the movies based on the keyword & save to state as results
   useEffect(() => {

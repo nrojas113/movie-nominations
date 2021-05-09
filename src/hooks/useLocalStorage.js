@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 //create custom hook for local storage
-
 const useLocalStorage = (key, initialValue) => {
   //used in App.js - key='nominations', initialValue=[]
   const [value, setValue] = useState(() => {
@@ -17,8 +16,8 @@ const useLocalStorage = (key, initialValue) => {
     }
   });
 
-  //save book info to local storage (as string) if key or value (nominations array) changes
-  //when new book is added to nominations array, then below is executed (store it to local storage)
+  //save nominations info to local storage (as string) if key or value (nominations array) changes
+  //when new nomination is added to nominations array, then below is executed (store it to local storage)
   useEffect(() => {
     window.localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
