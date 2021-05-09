@@ -10,7 +10,8 @@ import useLocalStorage from "./hooks/useLocalStorage";
 const apikey = process.env.REACT_APP_API_KEY;
 
 function App() {
-  // const [nominations, setNominations] = useState([]);
+  //Use custom hooks (useLocalStorage) to save user's nomination choices
+  //to local storage every time user add nomination.
   //initialize the nominations as array (key="nominations", value=[])
   const [nominations, setNominations] = useLocalStorage("nominations", []);
 
