@@ -9,6 +9,7 @@ import AlertMessage from "./components/AlertMessage";
 // import { apikey } from "./secrets";
 import useLocalStorage from "./hooks/useLocalStorage";
 const apikey = process.env.API_KEY;
+console.log(apikey);
 
 function App() {
   // const [nominations, setNominations] = useState([]);
