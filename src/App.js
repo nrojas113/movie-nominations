@@ -6,8 +6,9 @@ import SearchForm from "./components/SearchForm";
 import NominationList from "./components/NominationList";
 import Results from "./components/Results";
 import AlertMessage from "./components/AlertMessage";
-import { apikey } from "./secrets";
+// import { apikey } from "./secrets";
 import useLocalStorage from "./hooks/useLocalStorage";
+const apikey = process.env.API_KEY;
 
 function App() {
   // const [nominations, setNominations] = useState([]);
