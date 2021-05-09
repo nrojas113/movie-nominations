@@ -70,7 +70,7 @@ function App() {
       try {
         if (title) {
           const { data } = await axios.get(
-            `http://www.omdbapi.com/?apikey=${apikey}&s=${title}&page=${page}`
+            `http://www.omdbapi.com/?apikey=${apikey}&s=${title}&type=movie&page=${page}`
           );
           if (data.Search) {
             setResults(data.Search);
