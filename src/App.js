@@ -85,7 +85,7 @@ function App() {
 
   return (
     <Container>
-      <Header />
+      <Header nominationsCount={nominations.length} />
       <SearchForm handleInputChange={handleInputChange} keyword={keyword} />
       {alert && (
         <AlertMessage
