@@ -8,8 +8,7 @@ import Results from "./components/Results";
 import AlertMessage from "./components/AlertMessage";
 // import { apikey } from "./secrets";
 import useLocalStorage from "./hooks/useLocalStorage";
-const apikey = process.env.API_KEY;
-console.log(apikey);
+const apikey = process.env.REACT_APP_API_KEY;
 
 function App() {
   // const [nominations, setNominations] = useState([]);
