@@ -1,36 +1,44 @@
 import React from "react";
-import { Col, Button } from "react-bootstrap";
+import NominateButton from "./NominateButton";
+import DeleteButton from "./DeleteButton";
+import imageIcon from "../no-image-icon.png";
+import { Col, Card } from "react-bootstrap";
 
-function SingleResult({ result, addNomination, deleteNomination }) {
+function SingleResult({
+  result,
+  addNomination,
+  deleteNomination,
+  nominations,
+}) {
   return (
     <Col className="text-center mt-5">
-      <h2 style={{ fontSize: "1.5em" }}>
-        {result.Title} ({result.Year})
-      </h2>
-      <img
-        src={result.Poster}
-        alt="movie poster"
-        className="mb-3"
-        height="400px"
-      />
-      {addNomination && (
-        <Button
-          type="button"
-          variant="primary"
-          onClick={(evt) => addNomination(evt, result)}
-        >
-          Nominate
-        </Button>
-      )}
-      {deleteNomination && (
-        <Button
-          type="button"
-          variant="warning"
-          onClick={(evt) => deleteNomination(evt, result.Title)}
-        >
-          Remove
-        </Button>
-      )}
+      <Card
+        style={{
+          width: "20rem",
+          padding: "1em",
+          boxShadow: "0px 0px 10px 2px rgba(100, 100, 100, 0.6) ",
+        }}
+      >
+        <Card.Title>
+          {result.Title} ({result.Year})
+        </Card.Title>
+        <img
+          src={result.Poster === "N/A" ? imageIcon : result.Poster}
+          alt="movie poster"
+          className="mb-3"
+          height="400px"
+        />
+        {addNomination && (
+          <NominateButton
+            nominations={nominations}
+            addNomination={addNomination}
+            result={result}
+          />
+        )}
+        {deleteNomination && (
+          <DeleteButton deleteNomination={deleteNomination} result={result} />
+        )}
+      </Card>
     </Col>
   );
 }

@@ -3,10 +3,10 @@ import { Container, Row } from "react-bootstrap";
 import SingleResult from "./SingleResult";
 
 function NominationList({ nominations, deleteNomination }) {
-  console.log("Nomination", nominations);
   return (
     <Container
       style={{ backgroundColor: "mistyrose", padding: "3em", marginTop: "2em" }}
+      id="nominations"
     >
       <h1>My Nominations</h1>
       <Row>
@@ -14,7 +14,7 @@ function NominationList({ nominations, deleteNomination }) {
           nominations.map((nomination, idx) => (
             <SingleResult
               key={idx}
-              result={nomination.movie}
+              result={nomination}
               deleteNomination={deleteNomination}
             />
           ))}

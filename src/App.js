@@ -5,12 +5,17 @@ import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
 import NominationList from "./components/NominationList";
 import Results from "./components/Results";
+import AlertMessage from "./components/AlertMessage";
 import { apikey } from "./secrets";
 
 function App() {
   const [nominations, setNominations] = useState([]);
   const [results, setResults] = useState([]);
+  const [resultCount, setResultCount] = useState(0);
   const [keyword, setKeyword] = useState("");
+  const [page, setPage] = useState(1);
+  const [alert, setAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   //This function triggers when user types keyword in input form
   //Save the user input (movie title keyword) to state as keyword
@@ -18,19 +23,34 @@ function App() {
     setKeyword(evt.target.value);
   };
 
-  //This function triggers when user click "save" on movie.
+  //This function triggers when user click "nominate" on movie.
   //Adds the nomination to state as nominations
   const addNomination = (evt, userChoice) => {
-    let copy = [...nominations];
-    copy = [...copy, { id: nominations.length + 1, movie: userChoice }];
-    setNominations(copy);
+    if (nominations.length < 5) {
+      let copy = [...nominations];
+      copy = [...copy, { ...userChoice }];
+      setNominations(copy);
+      setAlert(true);
+      window.scrollTo(0, 0);
+    } else {
+      setAlert(true);
+      setAlertMessage("Error");
+      window.scrollTo(0, 0);
+    }
   };
 
   const deleteNomination = (evt, userChoice) => {
     let copy = nominations.filter(
-      (nomination) => nomination.movie.Title !== userChoice
+      (nomination) => nomination.Title !== userChoice
     );
     setNominations(copy);
+    setAlert(false);
+    setAlertMessage("");
+  };
+
+  const handlePageClick = (evt) => {
+    const selectedPage = evt.selected;
+    setPage(selectedPage);
   };
 
   //This useEffect triggers if the keyword (state) changes.
@@ -40,10 +60,11 @@ function App() {
       try {
         if (title) {
           const { data } = await axios.get(
-            `http://www.omdbapi.com/?apikey=${apikey}&s=${title}&page=1`
+            `http://www.omdbapi.com/?apikey=${apikey}&s=${title}&page=${page}`
           );
           if (data.Search) {
             setResults(data.Search);
+            setResultCount(data.totalResults);
           }
         }
       } catch (error) {
@@ -51,16 +72,27 @@ function App() {
       }
     };
     fetchMovies(keyword);
-  }, [keyword]);
+  }, [keyword, page]);
 
   return (
     <Container>
       <Header />
       <SearchForm handleInputChange={handleInputChange} keyword={keyword} />
+      {alert && (
+        <AlertMessage
+          setAlert={setAlert}
+          nominations={nominations}
+          alertMessage={alertMessage}
+        />
+      )}
       <Results
         addNomination={addNomination}
         results={results}
         keyword={keyword}
+        nominations={nominations}
+        setPage={setPage}
+        totalResults={resultCount}
+        handlePageClick={handlePageClick}
       />
       <NominationList
         nominations={nominations}
