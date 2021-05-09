@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 function Search({ handleInputChange, keyword }) {
   return (
     <Form className="mb-4">
-      <Form.Label>Search Movies</Form.Label>
+      <Form.Label>Search Movies (Please input movie title)</Form.Label>
       <Form.Control
         type="text"
         name="keyword"

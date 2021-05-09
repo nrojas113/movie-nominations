@@ -7,9 +7,13 @@ import NominationList from "./components/NominationList";
 import Results from "./components/Results";
 import AlertMessage from "./components/AlertMessage";
 import { apikey } from "./secrets";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
-  const [nominations, setNominations] = useState([]);
+  // const [nominations, setNominations] = useState([]);
+  //initialize the nominations as array (key="nominations", value=[])
+  const [nominations, setNominations] = useLocalStorage("nominations", []);
+
   const [results, setResults] = useState([]);
   const [resultCount, setResultCount] = useState(0);
   const [keyword, setKeyword] = useState("");
@@ -23,7 +27,7 @@ function App() {
     setKeyword(evt.target.value);
   };
 
-  //This function triggers when user click "nominate" on movie.
+  //This function is triggered when user click "nominate" on movie.
   //Adds the nomination to state as nominations
   const addNomination = (evt, userChoice) => {
     if (nominations.length < 5) {
@@ -39,6 +43,8 @@ function App() {
     }
   };
 
+  //This function is triggered when user clicks "Remove" from My Nomination list.
+  //Deletes the nominated movie from the nominations
   const deleteNomination = (evt, userChoice) => {
     let copy = nominations.filter(
       (nomination) => nomination.Title !== userChoice
@@ -48,12 +54,15 @@ function App() {
     setAlertMessage("");
   };
 
+  //This function is triggered when user clicks the page number.
+  //selected page will be inserted into the query.
   const handlePageClick = (evt) => {
     const selectedPage = evt.selected;
     setPage(selectedPage);
   };
 
-  //This useEffect triggers if the keyword (state) changes.
+  useEffect(() => {}, []);
+  //This useEffect triggers if the keyword & page (state) changes.
   //Fetch the movies based on the keyword & save to state as results
   useEffect(() => {
     const fetchMovies = async (title) => {
